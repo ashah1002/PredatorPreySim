@@ -128,11 +128,9 @@ void World::checkForCollisions() {
         }
     }
 
-    // Remove duplicates and sort in descending order
     sort(preyToRemove.begin(), preyToRemove.end(), greater<size_t>());
     preyToRemove.erase(unique(preyToRemove.begin(), preyToRemove.end()), preyToRemove.end());
 
-    // Remove prey from back to front to preserve indices
     for(size_t idx : preyToRemove) {
         _prey.erase(_prey.begin() + idx);
     }
@@ -152,7 +150,7 @@ void World::reproduceAgents() {
         float reproductionProbability = baseProbability * (1.0f + excessPrey);
         // Cap at 1.0 (100% chance)
         reproductionProbability = std::min(reproductionProbability, 1.0f);
-        
+
         float chance = static_cast<float>(rand()) / RAND_MAX;
         if(chance < reproductionProbability) {
             newPredators.push_back(Predator(Vector2D(0, _config.width, 0, _config.height)));
@@ -160,7 +158,7 @@ void World::reproduceAgents() {
     }
     
     for(auto& prey : _prey) {
-        float densityFactor = 1.0f - (float)_prey.size() / preyCarryingCapacity;
+        float densityFactor = 1.0f - (float)_prey.size() / _config.preyCarryingCapacity;
         densityFactor = std::max(0.0f, densityFactor);
         
         float adjustedRate = _config.preyReproductionRate * densityFactor;
