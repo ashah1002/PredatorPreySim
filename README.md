@@ -7,3 +7,6 @@ The project is inspired by the final project of a course I took at IMSA called C
 
 ## Status
 Work in progress
+
+## To-Do
+- Neural Network brain for agents (trained via evolution)
