@@ -103,15 +103,15 @@ void World::printSimulationState(int generation, std::ofstream& outfile) {
 
 void World::keepAgentInBounds(Agent& agent) {
     Vector2D position = agent.getPosition();
-    if(position.getX() < 0) {
-        position.setX(0);
-    } else if(position.getX() > _config.width) {
-        position.setX(_config.width);
+    if(position.getX() - agent.getRadius()< 0) {
+        position.setX(0 + agent.getRadius());
+    } else if(position.getX() + agent.getRadius() > _config.width) {
+        position.setX(_config.width - agent.getRadius());
     }
-    if(position.getY() < 0) {
-        position.setY(0);
-    } else if(position.getY() > _config.height) {
-        position.setY(_config.height);
+    if(position.getY() - agent.getRadius() < 0) {
+        position.setY(0 + agent.getRadius());
+    } else if(position.getY() + agent.getRadius() > _config.height) {
+        position.setY(_config.height - agent.getRadius());
     }
     agent.setPosition(position);
 }
