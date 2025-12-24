@@ -5,10 +5,13 @@ class Vector2D {
 public:
     
     Vector2D(float x, float y);
+    Vector2D(int minX, int maxX, int minY, int maxY);
     Vector2D();
 
     float magnitude() const;
     float dot(Vector2D other) const;
+    
+    void capMagnitude(float maxMagnitude);
     
     bool operator==(const Vector2D& other) const;
     bool operator!=(const Vector2D& other) const;

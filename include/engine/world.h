@@ -4,27 +4,30 @@
 #include "entities/prey.h"
 #include "entities/agent.h"
 #include <vector>
+#include <fstream>
 #include <memory>
 
 struct WorldConfig {
 
     // World
-    float width = 10.0f;
-    float height = 10.0f;
+    int width = 50;
+    int height = 50;
 
     // Timing
-    float duration = 100.0f;
-    float tick = 0.016f;
+    float duration = 50.0f;
+    float tick = 0.1f;
 
     // Population
-    int numGenerations = 10;
-    int numPredators = 5;
-    int numPrey = 20;
+    int numGenerations = 100;
+    int numPredators = 75;
+    int numPrey = 150;
 
     // Evolution/Rules
-    float reproductionRate = 0.1f;
-    float mutationRate = 0.05f;
-    float predatorKillRateNeededForSurvival = 2.0f;
+    float predatorReproductionRate = 0.25f;
+    float preyReproductionRate = 0.55f;
+
+    int predatorHungerThreshold = 1;
+    int preyCarryingCapacity = 500;
 };
 
 
@@ -37,11 +40,15 @@ public:
 
 private:
     WorldConfig _config;
-    std::vector<std::unique_ptr<Agent>> _agents;
+
+    std::vector<Predator> _predators;
+    std::vector<Prey> _prey;
 
     void keepAgentInBounds(Agent& agent);
     void checkForCollisions();
-    void printGenerationState(float time);
-    void printSimulationState(int generation);
-    void runGeneration();
+    void reproduceAgents();
+    void initializeSimulation();
+    void printGenerationState(float time, std::ofstream& outfile);
+    void printSimulationState(int generation, std::ofstream& outfile);
+    void runGeneration(int generation, std::ofstream& outfile);
 };

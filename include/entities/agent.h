@@ -10,9 +10,8 @@ enum AgentType {
 class Agent {
 public:
 
-    Agent();
     Agent(Vector2D position);
-    ~Agent();
+    virtual ~Agent();
 
     Vector2D getPosition() const;
     Vector2D getVelocity() const;
@@ -24,11 +23,12 @@ public:
     void setPosition(Vector2D position);
     void setVelocity(Vector2D velocity);
 
-    void update(float tick);
+    virtual void update(float tick);
 
-private:
+protected:
     Vector2D _position;
     Vector2D _velocity;   
+    float _maxSpeed;
     float _radius;
     AgentType _type;
 };

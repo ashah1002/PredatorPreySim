@@ -47,3 +47,9 @@
 # Build directories
 build/
 bin/
+
+# Logs
+
+logs/*.txt
+logs/*.csv
+logs/*.png
