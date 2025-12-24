@@ -9,4 +9,6 @@ The project is inspired by the final project of a course I took at IMSA called C
 Work in progress
 
 ## To-Do
-- Neural Network brain for agents
+- Raycasting for agent "vision"
+- Spatial partitioning for collisons/rays
+- Neural Network for agent "brain"
