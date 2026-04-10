@@ -21,7 +21,7 @@ python3 scripts/visualize.py
 - **Evolution**: Agents with higher fitness (predators that eat more, prey that survive) reproduce at higher rates each generation.
 
 ## Status
-Work in progress — evolution/weight inheritance not yet implemented (agents currently use random NN weights each generation).
+Work in progress
 
 ## To-Do
 - ~~Raycasting for agent "vision"~~
