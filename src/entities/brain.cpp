@@ -27,3 +27,22 @@ std::vector<std::vector<std::vector<float>>> Brain::getParameters() {
 void Brain::loadParameters(const std::vector<std::vector<std::vector<float>>>& params) {
     _mlp.loadParameters(params);
 }
+
+void Brain::mutate(float mutationRate, float mutationStrength) {
+    auto params = _mlp.getParameters();
+
+    for (auto& layer : params) {
+        for (auto& neuron : layer) {
+            for (float& w : neuron) {
+                float roll = static_cast<float>(rand()) / RAND_MAX;
+                if (roll < mutationRate) {
+                    float noise = -mutationStrength
+                                  + static_cast<float>(rand()) / RAND_MAX * 2.0f * mutationStrength;
+                    w += noise;
+                }
+            }
+        }
+    }
+
+    _mlp.loadParameters(params);
+}

@@ -27,5 +27,5 @@ Work in progress — evolution/weight inheritance not yet implemented (agents cu
 - ~~Raycasting for agent "vision"~~
 - ~~Spatial partitioning for collisions/rays~~
 - ~~Neural Network for agent "brain"~~
-- Evolutionary weight inheritance (crossover + mutation across generations)
+- ~~Evolutionary weight inheritance (crossover + mutation across generations)~~
 - Visualization of agent trajectories and neural activations

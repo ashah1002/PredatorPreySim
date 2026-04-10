@@ -33,6 +33,10 @@ struct WorldConfig {
 
     // Spatial grid cell size (should be >= vision range for efficiency)
     float gridCellSize = 10.0f;
+
+    // Evolution: mutation parameters for inherited brains
+    float mutationRate = 0.1f;      // per-weight mutation probability
+    float mutationStrength = 0.2f;  // max magnitude of weight perturbation
 };
 
 

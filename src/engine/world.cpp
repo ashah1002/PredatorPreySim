@@ -182,12 +182,15 @@ void World::reproduceAgents() {
 
         // Scale probability by excess prey (more prey = higher chance)
         float reproductionProbability = baseProbability * (1.0f + excessPrey);
-        // Cap at 1.0 (100% chance)
         reproductionProbability = std::min(reproductionProbability, 1.0f);
 
         float chance = static_cast<float>(rand()) / RAND_MAX;
         if(chance < reproductionProbability) {
-            newPredators.push_back(Predator(Vector2D(0, _config.width, 0, _config.height)));
+            // Offspring inherits parent's brain weights, then mutates
+            Predator child(Vector2D(0, _config.width, 0, _config.height));
+            child.getBrain().loadParameters(predator.getBrain().getParameters());
+            child.getBrain().mutate(_config.mutationRate, _config.mutationStrength);
+            newPredators.push_back(std::move(child));
         }
     }
 
@@ -199,7 +202,11 @@ void World::reproduceAgents() {
 
         float chance = static_cast<float>(rand()) / RAND_MAX;
         if(chance < adjustedRate) {
-            newPrey.push_back(Prey(Vector2D(0, _config.width, 0, _config.height)));
+            // Offspring inherits parent's brain weights, then mutates
+            Prey child(Vector2D(0, _config.width, 0, _config.height));
+            child.getBrain().loadParameters(prey.getBrain().getParameters());
+            child.getBrain().mutate(_config.mutationRate, _config.mutationStrength);
+            newPrey.push_back(std::move(child));
         }
     }
 

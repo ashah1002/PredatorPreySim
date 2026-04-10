@@ -27,6 +27,10 @@ public:
     std::vector<std::vector<std::vector<float>>> getParameters();
     void loadParameters(const std::vector<std::vector<std::vector<float>>>& params);
 
+    // Mutate weights in-place: each weight has mutationRate chance of being
+    // perturbed by uniform noise in [-mutationStrength, mutationStrength]
+    void mutate(float mutationRate, float mutationStrength);
+
 private:
     MLP _mlp;
 };
