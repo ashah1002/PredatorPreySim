@@ -22,3 +22,34 @@ MLP::MLP(int inputDims, const std::vector<int>& hiddenDims, int outputDims) {
     // Final hidden layer to output
     _layers.push_back(std::make_unique<Linear>(hiddenDims.back(), outputDims));
 }
+
+std::vector<float> MLP::forward(const std::vector<float>& x) {
+    std::vector<float> out = x;
+    for (auto& layer : _layers) {
+        out = layer->forward(out);
+    }
+    return out;
+}
+
+std::vector<std::vector<std::vector<float>>> MLP::getParameters() {
+    std::vector<std::vector<std::vector<float>>> allParams;
+    for (auto& layer : _layers) {
+        auto params = layer->getParameters();
+        if (!params.empty()) {
+            allParams.push_back(params);
+        }
+    }
+    return allParams;
+}
+
+void MLP::loadParameters(const std::vector<std::vector<std::vector<float>>>& params) {
+    size_t paramIdx = 0;
+    for (auto& layer : _layers) {
+        auto layerParams = layer->getParameters();
+        if (!layerParams.empty() && paramIdx < params.size()) {
+            auto p = params[paramIdx];
+            layer->loadParameters(p);
+            paramIdx++;
+        }
+    }
+}

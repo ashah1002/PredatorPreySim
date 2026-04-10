@@ -1,18 +1,16 @@
-#pragma once 
+#pragma once
 #include <vector>
-
-using namespace std;
 
 class Neuron {
 public:
     Neuron(int dim, bool random=true);
 
-    float activate(vector<float> x);
-    vector<float> getParameters() const;  
-    void loadWeights(vector<float> weights);
-    
+    float activate(const std::vector<float>& x);
+    std::vector<float> getParameters() const;
+    void loadWeights(std::vector<float> weights);
+
 private:
     int _dim;
-    vector<float> _weights;
+    std::vector<float> _weights;
     float _bias;
 };

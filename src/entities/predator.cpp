@@ -3,11 +3,8 @@
 Predator::Predator(Vector2D position) : Agent(position) {
     _type = AgentType::PREDATOR;
     _maxSpeed = PREDATOR_MAX_SPEED;
-    _preyEaten = 0;
     _radius = 2.0f;
-}
-
-Predator::~Predator() {
+    _preyEaten = 0;
 }
 
 void Predator::eatPrey() {

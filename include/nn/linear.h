@@ -1,22 +1,20 @@
-#pragma once 
+#pragma once
 #include "nn/neuron.h"
 #include "nn/layer.h"
 #include <vector>
-
-using namespace std;
 
 class Linear : public Layer {
 public:
     Linear(int fanIn, int fanOut, bool bias=true, bool randomInit=true);
     ~Linear() = default;
 
-    vector<vector<float>> getParameters();
-    void loadParameters(vector<vector<float>> &params);
-    
-    vector<float> forward(const vector<float>& input);
+    std::vector<std::vector<float>> getParameters() override;
+    void loadParameters(std::vector<std::vector<float>>& params) override;
+
+    std::vector<float> forward(const std::vector<float>& input) override;
 
 private:
-    vector<Neuron> _neurons;
+    std::vector<Neuron> _neurons;
     int _fanIn;
     int _fanOut;
 };

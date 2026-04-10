@@ -2,17 +2,16 @@
 
 #include <vector>
 #include <string>
-#include <memory>
 #include "nn/mlp.h"
 
 class Classifier {
 public:
-    // Use const reference for input parameters
-    Classifier(int inputDim, const vector<int>& hiddenDims, const vector<string>& classes);
-    ~Classifier() = default; 
+    Classifier(int inputDim, const std::vector<int>& hiddenDims, const std::vector<std::string>& classes);
+    ~Classifier() = default;
 
-    string action(vector<float> inputs);
+    std::string action(const std::vector<float>& inputs);
 
 private:
-  //  MLP _mlp;
+    MLP _mlp;
+    std::vector<std::string> _classes;
 };

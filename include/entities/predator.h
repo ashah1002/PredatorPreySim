@@ -1,14 +1,17 @@
-#pragma once 
+#pragma once
 
 #include "entities/agent.h"
 #include "utils/vector2d.h"
 
-const float PREDATOR_MAX_SPEED = 4.0f;
+constexpr float PREDATOR_MAX_SPEED = 4.0f;
 
 class Predator : public Agent {
 public:
     Predator(Vector2D position);
-    ~Predator();
+    ~Predator() = default;
+
+    Predator(Predator&&) = default;
+    Predator& operator=(Predator&&) = default;
 
     void eatPrey();
     int getPreyEaten() const;
@@ -16,7 +19,4 @@ public:
 
 private:
     int _preyEaten;
-    float _radius;
-    AgentType _type = PREDATOR;
-    float _maxSpeed;
 };

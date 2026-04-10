@@ -1,11 +1,19 @@
-#pragma once 
+#pragma once
+
 #include "nn/layer.h"
 #include <vector>
-
-using namespace std;
+#include <algorithm>
 
 class ReLU : public Layer {
 public:
     ReLU() = default;
-//    vector<float> forward(const vector<float>& input);
+
+    std::vector<float> forward(const std::vector<float>& input) override {
+        std::vector<float> out;
+        out.reserve(input.size());
+        for (float val : input) {
+            out.push_back(std::max(0.0f, val));
+        }
+        return out;
+    }
 };

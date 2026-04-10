@@ -128,3 +128,9 @@ void Vector2D::setY(float y) {
 float Vector2D::distance(Vector2D other) const {
     return sqrt(pow(other.getX() - _x, 2) + pow(other.getY() - _y, 2));
 }
+
+Vector2D Vector2D::normalized() const {
+    float mag = magnitude();
+    if (mag < 1e-6f) return Vector2D(1.0f, 0.0f);
+    return Vector2D(_x / mag, _y / mag);
+}

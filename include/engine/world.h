@@ -1,8 +1,10 @@
-#pragma once 
+#pragma once
 
 #include "entities/predator.h"
 #include "entities/prey.h"
 #include "entities/agent.h"
+#include "entities/vision.h"
+#include "engine/spatial_grid.h"
 #include <vector>
 #include <fstream>
 #include <memory>
@@ -10,8 +12,8 @@
 struct WorldConfig {
 
     // World
-    int width = 50;
-    int height = 50;
+    int width = 100;
+    int height = 100;
 
     // Timing
     float duration = 50.0f;
@@ -19,22 +21,24 @@ struct WorldConfig {
 
     // Population
     int numGenerations = 100;
-    int numPredators = 75;
-    int numPrey = 150;
+    int numPredators = 50;
+    int numPrey = 200;
 
     // Evolution/Rules
-    float predatorReproductionRate = 0.25f;
-    float preyReproductionRate = 0.55f;
+    float predatorReproductionRate = 0.2f;
+    float preyReproductionRate = 0.65f;
 
     int predatorHungerThreshold = 1;
-    int preyCarryingCapacity = 500;
+    int preyCarryingCapacity = 1000;
+
+    // Spatial grid cell size (should be >= vision range for efficiency)
+    float gridCellSize = 10.0f;
 };
 
 
 class World {
 public:
     World(WorldConfig config);
-    //~World();
 
     void runSimulation();
 
@@ -44,6 +48,10 @@ private:
     std::vector<Predator> _predators;
     std::vector<Prey> _prey;
 
+    SpatialGrid _grid;
+    Vision _vision;
+
+    void rebuildGrid();
     void keepAgentInBounds(Agent& agent);
     void checkForCollisions();
     void reproduceAgents();

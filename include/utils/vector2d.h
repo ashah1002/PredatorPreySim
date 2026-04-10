@@ -39,6 +39,7 @@ public:
     void setY(float y);
 
     float distance(Vector2D other) const;
+    Vector2D normalized() const;
 private:
     float _x;
     float _y;

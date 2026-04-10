@@ -5,7 +5,3 @@ Prey::Prey(Vector2D position) : Agent(position) {
     _radius = 1.0f;
     _maxSpeed = PREY_MAX_SPEED;
 }
-
-Prey::~Prey() {
-}
-
